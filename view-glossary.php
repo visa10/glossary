@@ -98,10 +98,9 @@ include "components/header.php";
                 const lang = button.data('lang');
                 const term = button.data('term');
 
-                modal.find('.modal-title').text('New translate to ' + `[ ${lang} ] - ${term}`)
-
                 const modal = $(this);
-                console.log(modal.find('input[name=term]'));
+
+                modal.find('.modal-title').text('New translate to ' + `[ ${lang} ] - ${term}`);
                 modal.find('input[name=term]').val(term);
                 modal.find('input[name=lang]').val(lang);
             })
