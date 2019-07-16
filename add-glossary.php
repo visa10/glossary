@@ -18,16 +18,17 @@
 
         $translate = [];
         for ($l = 1; $l < 999; $l++) {
-            $lang = $_POST["lang-" . $l];
-            if ($lang) {
+
+            if (array_key_exists("lang-" . $l, $_POST)) {
+                $lang = $_POST["lang-" . $l];
                 for ($t = 1; $t < 999; $t++) {
-                    $term = $_POST["term-" . $t];
-                    if ($term) {
+                    if (array_key_exists("term-$t", $_POST)) {
+                        $term = $_POST["term-" . $t];
                         $translate[$term] = [];
                         $translate[$term][$lang] = [];
                         for ($i = 1; $i < 999; $i++) {
-                            $tr = $_POST["lang-{$l}_term-{$t}_translate-{$i}"];
-                            if ($tr) {
+                            if (array_key_exists("lang-{$l}_term-{$t}_translate-{$i}", $_POST)) {
+                                $tr = $_POST["lang-{$l}_term-{$t}_translate-{$i}"];
                                 array_push($translate[$term][$lang], $tr);
                             } else {
                                 break;
@@ -42,6 +43,10 @@
             }
         }
 
+//        echo "<pre>";
+//        var_dump($translate);
+//        exit;
+
         foreach ($translate as $term => $data) {
             $termId = $model->addTerm($cardId, $term);
             foreach ($data as $lang => $trans) {
@@ -50,7 +55,10 @@
                 }
             }
         }
+        header("Location: view-glossary.php");
     }
+
+
     include "components/header.php";
 ?>
 
