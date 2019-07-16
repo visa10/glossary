@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.6deb5
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
--- Хост: localhost:3306
--- Время создания: Июл 16 2019 г., 09:06
--- Версия сервера: 5.7.25-0ubuntu0.18.04.2
--- Версия PHP: 7.2.15-0ubuntu0.18.04.1
+-- Хост: localhost
+-- Время создания: Июл 16 2019 г., 15:20
+-- Версия сервера: 8.0.16
+-- Версия PHP: 7.1.23
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -17,8 +19,20 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- База данных: `glosary`
+-- База данных: `glossary`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `card`
+--
+
+CREATE TABLE `card` (
+  `id` int(11) NOT NULL,
+  `theme` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `userId` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -28,7 +42,8 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `term` (
   `id` int(11) NOT NULL,
-  `name` varchar(255) DEFAULT NULL
+  `name` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
+  `cardId` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -41,7 +56,8 @@ CREATE TABLE `translate` (
   `id` int(11) NOT NULL,
   `termId` int(11) DEFAULT NULL,
   `lang` varchar(5) DEFAULT NULL,
-  `value` varchar(255) DEFAULT NULL
+  `value` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `userId` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -58,17 +74,14 @@ CREATE TABLE `users` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Дамп данных таблицы `users`
---
-
-INSERT INTO `users` (`id`, `username`, `password`, `email`) VALUES
-(1, 'a1@b.com', 'b0baee9d279d34fa1dfd71aadb908c3f', 'visa10@ukr.net'),
-(2, 'a2@b.com', '96e79218965eb72c92a549dd5a330112', 'a2@b.com'),
-(3, 'a2@b.com', '96e79218965eb72c92a549dd5a330112', 'a1@b.com');
-
---
 -- Индексы сохранённых таблиц
 --
+
+--
+-- Индексы таблицы `card`
+--
+ALTER TABLE `card`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Индексы таблицы `term`
@@ -93,20 +106,30 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT для таблицы `card`
+--
+ALTER TABLE `card`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT для таблицы `term`
 --
 ALTER TABLE `term`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT для таблицы `translate`
 --
 ALTER TABLE `translate`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
