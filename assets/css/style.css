@@ -197,3 +197,14 @@ table {
 	position: absolute;
 	top: 3px
 }
+
+.btn-dark {
+	color: #fff;
+	background-color: #333333;
+	border-color: #333333;
+	margin-top: 1px;
+}
+
+.modal  {
+	color: #000000;
+}

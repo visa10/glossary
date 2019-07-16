@@ -39,6 +39,7 @@ if(isset($_SESSION['username'])) {
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.js" ></script>
     <script src="/assets/js/bootstrap.min.js"></script>
+    <script src="/assets/js/pidie-0.0.8.js"></script>
 </head>
 <body>
 <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">

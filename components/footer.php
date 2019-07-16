@@ -9,7 +9,7 @@
 
 <!--<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/bootstrap-select.min.js"></script>-->
 <!--<script src="/assets/js/countrypicker.js"></script>-->
-<script src="/assets/js/pidie-0.0.8.js"></script>
+
 <script src="/assets/js/main.js"></script>
 
 </body>

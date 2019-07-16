@@ -71,7 +71,7 @@
 
         <ul class="nav nav-tabs" role="tablist">
             <li class="nav-item">
-                <a class="nav-link active" id="lang-1-tab"  href="#lang_1" data-toggle="tab">Joe Smith</a>
+                <a class="nav-link active" id="lang-1-tab"  href="#lang_1" data-toggle="tab">New</a>
             </li>
             <li class="add-language">
                 <a href="#" >+ Add Lang</a>
@@ -136,94 +136,14 @@
             </div>
         </div>
 
-        <!--<div class="pd-tabs-content" id="myTabContent">
-            <div class="tab-pane fade show active" id="translate-1" role="tabpanel" aria-labelledby="home-tab">
-                <table class="table table-borderless col-md-8">
-                    <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Term</th>
-                        <th scope="col">
-                            <div class="pd-flag-select pd-flag-primary pd-search-select">
-                                <select class="pd-languages " name="translate-1" id="changeLang" onchange="onChangeLanguage(this)"></select>
-                            </div>
-                        </th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <th scope="row">1*</th>
-                        <td><input type="text" name="term1" required></td>
-                        <td><input type="text" name="term1_translate1" required></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2*</th>
-                        <td><input type="text" name="term_2" required></td>
-                        <td><input type="text" name="translate_2" required></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3*</th>
-                        <td><input type="text" name="term_3" required></td>
-                        <td><input type="text" name="translate_3" required></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">4</th>
-                        <td><input type="text" name="term_4" ></td>
-                        <td><input type="text" name="translate_4" ></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">5</th>
-                        <td><input type="text" name="term_5" ></td>
-                        <td><input type="text" name="translate_5" ></td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>-->
-
-        <!--<table class="table table-borderless col-md-8">
-            <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Term</th>
-                <th scope="col">Translate</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <th scope="row">1*</th>
-                <td><input type="text" class="form-control " required></td>
-                <td><input type="text" class="form-control " required></td>
-            </tr>
-            <tr>
-                <th scope="row">2*</th>
-                <td><input type="text" class="form-control " required></td>
-                <td><input type="text" class="form-control " required></td>
-            </tr>
-            <tr>
-                <th scope="row">3*</th>
-                <td><input type="text" class="form-control " required></td>
-                <td><input type="text" class="form-control " required></td>
-            </tr>
-            <tr>
-                <th scope="row">4</th>
-                <td><input type="text" class="form-control " ></td>
-                <td><input type="text" class="form-control " ></td>
-            </tr>
-            <tr>
-                <th scope="row">5</th>
-                <td><input type="text" class="form-control " ></td>
-                <td><input type="text" class="form-control " ></td>
-            </tr>
-            </tbody>
-        </table>-->
-
         <div class="form-group row text-right">
             <div class="col-sm-8">
                 <button type="submit" class="btn btn-primary">Submit</button>
             </div>
         </div>
     </form>
+
+    <script src="/assets/js/add-glossary.js"></script>
 </main>
 
 <?php
