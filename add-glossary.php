@@ -51,7 +51,7 @@
                 }
             }
         }
-        header("Location: view-glossary.php?id=$resId");
+        header("Location: view-glossary.php?id=$termId");
     }
 
 
