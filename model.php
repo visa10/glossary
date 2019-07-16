@@ -2,10 +2,9 @@
 class Model
 {
     private $host = 'localhost';
-    private $dbname = 'glosary';
+    private $dbname = 'glossary';
     private $user = 'root';
-    private $password = 'root';
-    private $tabl_name = 'test_task';
+    private $password = 'rootroot';
     private $conn;
     
     public function __construct() 
@@ -56,5 +55,47 @@ class Model
         $stmt->execute(['email' => $email]);
 
         return $stmt->fetch();
+    }
+
+    function addCard($theme, $userId) {
+        $sql = "INSERT INTO card (theme, userId) VALUES (:theme, :userId)";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([
+            'theme' => $theme,
+            'userId' => $userId
+        ]);
+        return $this->conn->lastInsertId();
+    }
+
+    function addTerm($cardId, $term) {
+        try {
+            $stmt = $this->conn->prepare("SELECT id FROM term WHERE name=:term");
+            $stmt->execute(['term' => $term]);
+            $data = $stmt->fetch();
+            if ($data) {
+                return $data['id'];
+            }
+            // Insert Term
+            $sql = "INSERT INTO term (name, cardId) VALUES (:term, :cardId)";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([
+                'term' => $term,
+                'cardId' => $cardId
+            ]);
+            return $this->conn->lastInsertId();
+        } catch (Exception $e) {
+            echo 'Выброшено исключение: ',  $e->getMessage(), "\n";
+        }
+    }
+
+    function addTranslate($termId, $lang, $trans, $userId) {
+        $sql = "INSERT INTO translate (termId, lang, value, userId) VALUES (:termId, :lang, :value, :userId)";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([
+            'termId' => $termId,
+            'lang' => $lang,
+            'value' => $trans,
+            'userId' => $userId
+        ]);
     }
 }

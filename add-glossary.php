@@ -1,11 +1,57 @@
 <?php
+    error_reporting(E_ALL);
     session_start();
 
-    if(!isset($_SESSION['username'])){
+    if(!isset($_SESSION['username'])) {
         header("Location: index.php");
     }
 
-    include "components/header.php"
+    if ($_POST) {
+        require "model.php";
+
+        $model = new Model();
+        $userId = $_SESSION['userId'];
+
+        if ($_POST['theme']) {
+            $cardId = $model->addCard($_POST['theme'], $userId);
+        }
+
+        $translate = [];
+        for ($l = 1; $l < 999; $l++) {
+            $lang = $_POST["lang-" . $l];
+            if ($lang) {
+                for ($t = 1; $t < 999; $t++) {
+                    $term = $_POST["term-" . $t];
+                    if ($term) {
+                        $translate[$term] = [];
+                        $translate[$term][$lang] = [];
+                        for ($i = 1; $i < 999; $i++) {
+                            $tr = $_POST["lang-{$l}_term-{$t}_translate-{$i}"];
+                            if ($tr) {
+                                array_push($translate[$term][$lang], $tr);
+                            } else {
+                                break;
+                            }
+                        }
+                    } else {
+                        break;
+                    }
+                }
+            } else {
+                break;
+            }
+        }
+
+        foreach ($translate as $term => $data) {
+            $termId = $model->addTerm($cardId, $term);
+            foreach ($data as $lang => $trans) {
+                foreach ($trans as $tran) {
+                    $model->addTranslate($termId, $lang, $tran, $userId);
+                }
+            }
+        }
+    }
+    include "components/header.php";
 ?>
 
 <main role="main" class="inner cover">
@@ -14,7 +60,7 @@
         <div class="form-group row">
             <label for="inputEmail3" class="col-sm-2 col-form-label">Theme or subject</label>
             <div class="col-sm-6">
-                <input type="text" class="form-control" id="inputEmail3" required>
+                <input type="text" class="form-control" name="theme" id="inputEmail3" required>
             </div>
         </div>
 
@@ -85,12 +131,6 @@
             </div>
         </div>
 
-
-
-
-
-
-
         <!--<div class="pd-tabs-content" id="myTabContent">
             <div class="tab-pane fade show active" id="translate-1" role="tabpanel" aria-labelledby="home-tab">
                 <table class="table table-borderless col-md-8">
@@ -136,8 +176,6 @@
             </div>
         </div>-->
 
-
-
         <!--<table class="table table-borderless col-md-8">
             <thead>
             <tr>
@@ -174,9 +212,6 @@
             </tr>
             </tbody>
         </table>-->
-
-
-
 
         <div class="form-group row text-right">
             <div class="col-sm-8">
