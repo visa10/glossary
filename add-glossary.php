@@ -18,16 +18,16 @@
 
         $translate = [];
         for ($l = 1; $l < 999; $l++) {
-
-            if (array_key_exists("lang-" . $l, $_POST)) {
+            var_dump("lang-{$l}");
+            if (array_key_exists("lang-{$l}", $_POST) && $_POST["lang-{$l}"]) {
                 $lang = $_POST["lang-" . $l];
                 for ($t = 1; $t < 999; $t++) {
-                    if (array_key_exists("term-$t", $_POST)) {
-                        $term = $_POST["term-" . $t];
+                    if (array_key_exists("term-{$t}", $_POST) && $_POST["term-{$t}"]) {
+                        $term = $_POST["term-{$t}"];
                         $translate[$term] = [];
                         $translate[$term][$lang] = [];
                         for ($i = 1; $i < 999; $i++) {
-                            if (array_key_exists("lang-{$l}_term-{$t}_translate-{$i}", $_POST)) {
+                            if (array_key_exists("lang-{$l}_term-{$t}_translate-{$i}", $_POST) && $_POST["lang-{$l}_term-{$t}_translate-{$i}"]) {
                                 $tr = $_POST["lang-{$l}_term-{$t}_translate-{$i}"];
                                 array_push($translate[$term][$lang], $tr);
                             } else {
@@ -42,10 +42,6 @@
                 break;
             }
         }
-
-//        echo "<pre>";
-//        var_dump($translate);
-//        exit;
 
         foreach ($translate as $term => $data) {
             $termId = $model->addTerm($cardId, $term);

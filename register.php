@@ -23,8 +23,9 @@
                 echo("true"); exit;
             }
 
+        } else {
+            $errMSG = "User exists";
         }
-        var_dump($userExists);
     }
 
     include "components/header.php"
@@ -34,6 +35,16 @@
     <form class="form-signin" id="register-form" name="register" method="post">
 
         <h1 class="h3 mb-3 font-weight-normal">Create Account</h1>
+        <?php
+        if (isset($errMSG)) { ?>
+            <div class="form-group">
+                <div class="alert alert-danger">
+                    <span class="glyphicon glyphicon-info-sign"></span> <?php echo $errMSG; ?>
+                </div>
+            </div>
+            <?php
+        }
+        ?>
         <div id="message"></div>
 
         <input name="username" type="name" class="form-control has-error" placeholder="Name" required>
