@@ -47,11 +47,11 @@
             $termId = $model->addTerm($cardId, $term);
             foreach ($data as $lang => $trans) {
                 foreach ($trans as $tran) {
-                    $model->addTranslate($termId, $lang, $tran, $userId);
+                    $resId = $model->addTranslate($termId, $lang, $tran, $userId);
                 }
             }
         }
-        header("Location: view-glossary.php");
+        header("Location: view-glossary.php?id=$resId");
     }
 
 

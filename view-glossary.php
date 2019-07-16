@@ -37,22 +37,23 @@ include "components/header.php";
 ?>
     <main role="main" class="inner cover">
         <?php foreach ($data as $cardName => $terms): ?>
-            <h3 class="cover-heading"><?= $cardName ?></h3>
+            <h3 class="cover-heading pb-5 "><?= $cardName ?></h3>
             <div class="pd-tabs-content" id="myTabContent">
                 <dl class="row">
                     <?php foreach ($terms as $term => $languages): ?>
                         <dt class="col-sm-3"><?= $term ?></dt>
                         <?php foreach ($languages as $lang => $translates): ?>
                             <dd class="col-sm-9">
-                                <?php
-                                    echo "[ $lang ] - " . implode(', ', $translates);
-                                ?>
+                                <ul class="list-group">
+                                    <li class="list-group-item active"><?= "[ $lang ]" ?></li>
+                                    <li class="list-group-item text-secondary"><?= implode(', ', $translates) ?></li>
+                                </ul>
                             </dd>
-                        <?php endforeach;?>
-                    <?php endforeach;?>
+                        <?php endforeach; ?>
+                    <?php endforeach; ?>
                 </dl>
             </div>
-        <?php endforeach;?>
+        <?php endforeach; ?>
     </main>
 
 <?php

@@ -97,6 +97,7 @@ class Model
             'value' => $trans,
             'userId' => $userId
         ]);
+        return $this->conn->lastInsertId();
     }
 
     function getCard($id) {
