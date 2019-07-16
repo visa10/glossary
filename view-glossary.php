@@ -42,14 +42,16 @@ include "components/header.php";
                 <dl class="row">
                     <?php foreach ($terms as $term => $languages): ?>
                         <dt class="col-sm-3"><?= $term ?></dt>
-                        <?php foreach ($languages as $lang => $translates): ?>
+
                             <dd class="col-sm-9">
                                 <ul class="list-group">
+                                    <?php foreach ($languages as $lang => $translates): ?>
                                     <li class="list-group-item active"><?= "[ $lang ]" ?></li>
                                     <li class="list-group-item text-secondary"><?= implode(', ', $translates) ?></li>
+                                    <?php endforeach; ?>
                                 </ul>
                             </dd>
-                        <?php endforeach; ?>
+
                     <?php endforeach; ?>
                 </dl>
             </div>
