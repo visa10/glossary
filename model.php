@@ -98,4 +98,28 @@ class Model
             'userId' => $userId
         ]);
     }
+
+    function getCard($id) {
+        $sql = "SELECT 
+                    card.id as cardId,
+                    card.theme,
+                    #term.id as term,
+                    #translate.value as translate,
+                    term.id as termId,
+                    term.name as term,
+                    translate.id as translateId,
+                    translate.value,
+                    translate.lang
+                    #CONCAT(term.id, '-', term.name) as term,
+                    #CONCAT(translate.termId, '-', translate.value) as translate
+                FROM card 
+                LEFT JOIN term ON term.cardId = card.id
+                LEFT JOIN translate ON term.id = translate.termId
+            WHERE cardId=:id
+            #GROUP BY term.id
+        ";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute(['id' => $id]);
+        return $stmt->fetchAll();
+    }
 }

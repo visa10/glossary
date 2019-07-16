@@ -2,22 +2,57 @@
 
 session_start();
 
+if ($_GET) {
+
+
+    if ($_GET['id']) {
+        require "model.php";
+
+        $model = new Model();
+
+        $id = strip_tags(trim($_GET['id']));
+
+        $card = $model->getCard($id);
+        $data = [];
+
+        // transform data card
+        foreach ($card as $item) {
+
+            if (!array_key_exists($item['theme'], $data)) $data[$item['theme']] = [];
+            if (!array_key_exists($item['term'], $data[$item['theme']])) {
+                $data[$item['theme']][$item['term']] = [];
+            }
+            if (!array_key_exists($item['lang'], $data[$item['theme']][$item['term']])) $data[$item['theme']][$item['term']][$item['lang']] = [];
+
+            array_push($data[$item['theme']][$item['term']][$item['lang']], $item['value']);
+        }
+    }
+
+//    echo "<pre>";
+//    print_r($data); exit;
+}
 
 include "components/header.php";
 
 ?>
-
     <main role="main" class="inner cover">
-        <h1 class="cover-heading">Cover your page.</h1>
-        <div class="pd-tabs-content" id="myTabContent">
-            <dl class="row">
-                <dt class="col-sm-3">User Agent</dt>
-                <dd class="col-sm-9">An HTML user agent is any device that interprets HTML documents.</dd>
-                <dt class="col-sm-3 text-truncate">Client-side Scripting</dt>
-                <dd class="col-sm-9">Client-side scripting generally refers to the category of computer programs on the web that are executed by the user's web browser.</dd>
-                <dt class="col-sm-3">Document Tree</dt>
-                <dd class="col-sm-9">The tree of elements encoded in the source document.</dd>
-            </dl>
+        <?php foreach ($data as $cardName => $terms): ?>
+            <h3 class="cover-heading"><?= $cardName ?></h3>
+            <div class="pd-tabs-content" id="myTabContent">
+                <dl class="row">
+                    <?php foreach ($terms as $term => $languages): ?>
+                        <dt class="col-sm-3"><?= $term ?></dt>
+                        <?php foreach ($languages as $lang => $translates): ?>
+                            <dd class="col-sm-9">
+                                <?php
+                                    echo "[ $lang ] - " . implode(', ', $translates);
+                                ?>
+                            </dd>
+                        <?php endforeach;?>
+                    <?php endforeach;?>
+                </dl>
+            </div>
+        <?php endforeach;?>
     </main>
 
 <?php
