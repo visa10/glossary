@@ -45,7 +45,10 @@
 
 
         foreach ($translate as $term => $data) {
-            $termId = $model->addTerm($cardId, $term);
+            $termId = $model->getTernId($term);
+            if (!$termId) {
+                $termId = $model->addTerm($cardId, $term);
+            }
             foreach ($data as $lang => $trans) {
                 foreach ($trans as $tran) {
                     $resId = $model->addTranslate($termId, $lang, $tran, $userId);

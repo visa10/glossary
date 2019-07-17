@@ -1,5 +1,6 @@
 <?php
-    if(!isset($_SESSION['username'])) {
+var_dump($_SESSION['username']); exit;
+    if(isset($_SESSION['username'])){
         header("Location: index.php");
     }
 

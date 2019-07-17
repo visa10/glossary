@@ -1,22 +1,34 @@
 <?php
-/**
- * Created by IntelliJ IDEA.
- * User: vss
- * Date: 15.07.19
- * Time: 23:48
- */
-?>
+    require "model.php";
 
-<?php
     session_start();
+
     include "components/header.php";
+
+    $model = new Model();
+    $cards = $model->getCards();
 ?>
 
 <main role="main" class="inner cover">
-    <h1 class="cover-heading">Glossary</h1>
-    <p class="lead">
-        <a href="/add-glossary.php" class="btn btn-lg btn-secondary">Create glossary</a>
-    </p>
+    <div class="row">
+        <h2 class="cover-heading">Glossary</h2>
+        <p class="lead ml-auto">
+            <?php  if($login): ?>
+                <a href="/add-glossary.php" class="btn btn-secondary ml-5">Create glossary</a>
+            <?php endif; ?>
+        </p>
+    </div>
+
+
+    <ul class="list-rectangle">
+        <?php if (count($cards)):?>
+            <?php foreach ($cards as $card): ?>
+                <li><a href="view-glossary.php?id=<?= $card['id'] ?>"><?= $card['theme'] ?></a></li>
+            <?php  endforeach;?>
+        <?php else: ?>
+            ыы
+        <?php endif; ?>
+    </ul>
 </main>
 
 <?php

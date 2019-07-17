@@ -1,10 +1,13 @@
 <?php
+
+require './config.php';
+
 class Model
 {
     private $host = 'localhost';
     private $dbname = 'glossary';
     private $user = 'root';
-    private $password = 'rootroot';
+    private $password = 'root';
     private $conn;
     
     public function __construct() 
@@ -67,14 +70,18 @@ class Model
         return $this->conn->lastInsertId();
     }
 
+    function getTernId($term) {
+        $stmt = $this->conn->prepare("SELECT id FROM term WHERE name=:term");
+        $stmt->execute(['term' => $term]);
+        $data = $stmt->fetch();
+        if ($data) {
+            return $data['id'];
+        }
+        return false;
+    }
+
     function addTerm($cardId, $term) {
         try {
-            $stmt = $this->conn->prepare("SELECT id FROM term WHERE name=:term");
-            $stmt->execute(['term' => $term]);
-            $data = $stmt->fetch();
-            if ($data) {
-                return $data['id'];
-            }
             // Insert Term
             $sql = "INSERT INTO term (name, cardId) VALUES (:term, :cardId)";
             $stmt = $this->conn->prepare($sql);
@@ -98,6 +105,13 @@ class Model
             'userId' => $userId
         ]);
         return $this->conn->lastInsertId();
+    }
+
+    function getCards() {
+        $sql = "SELECT * FROM card";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll();
     }
 
     function getCard($id) {

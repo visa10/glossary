@@ -45,11 +45,22 @@ if(isset($_SESSION['username'])) {
 <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
 
 <header class="masthead ">
+
     <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3">
         <h1 class="my-0  font-weight-bold mr-5">Mini</h1>
         <nav class="my-2 my-md-0 mr-md-auto ">
             <a class="p-2 " href="/">Home</a>
             <a class="p-2 " href="/glossary.php">Glossary</a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                <form class="form-inline ml-auto">
+                    <div class="md-form my-0">
+                        <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+                    </div>
+                    <button href="#!" class="btn btn-outline-white btn-md my-0 ml-sm-2" type="submit">Search</button>
+                </form>
+
+            </div>
         </nav>
         <?php
             if (!$login) :

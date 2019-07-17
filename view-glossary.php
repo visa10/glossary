@@ -1,19 +1,34 @@
 <?php
+require "model.php";
+
+$model = new Model();
 
 session_start();
 
+$data = [];
+
+// aad translate
+if (isset($_SESSION['userId']) && isset($_POST) && isset($_POST['translate'])) {
+    $term = $_POST['term'];
+    $lang = $_POST['lang'];
+    $translate = $_POST['translate'];
+    $userId = $_SESSION['userId'];
+
+    $termId = $model->getTernId($term);
+
+    $model->addTranslate($termId, $lang, $translate, $userId);
+}
+
+
+// Get data
 if ($_GET) {
 
-
-    if ($_GET['id']) {
-        require "model.php";
-
-        $model = new Model();
+    if (isset($_GET['id'])) {
 
         $id = strip_tags(trim($_GET['id']));
 
         $card = $model->getCard($id);
-        $data = [];
+
 
         // transform data card
         foreach ($card as $item) {
@@ -48,6 +63,7 @@ include "components/header.php";
                                     <?php foreach ($languages as $lang => $translates): ?>
                                         <li class="list-group-item active">
                                             <b><?= "[ $lang ]" ?></b>
+                                            <?php if ($login): ?>
                                             <button class="btn btn-dark add-translate ml-auto mr-5"
                                                     data-toggle="modal"
                                                     data-target="#addTranslate"
@@ -55,6 +71,7 @@ include "components/header.php";
                                                     data-term="<?= $term ?>" >
                                                 Add translate
                                             </button>
+                                            <?php endif;?>
                                         </li>
                                     <li class="list-group-item text-secondary"><?= implode(', ', $translates) ?></li>
                                     <?php endforeach; ?>
@@ -76,12 +93,12 @@ include "components/header.php";
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form>
+                        <form method="post" >
                             <div class="form-group">
                                 <input type="hidden" name="term">
                                 <input type="hidden" name="lang">
                                 <label for="recipient-name" class="col-form-label">Translate:</label>
-                                <input type="text" class="form-control" id="translate" required >
+                                <input type="text" name="translate" class="form-control" id="translate" required >
                             </div>
                         </form>
                     </div>
@@ -106,7 +123,9 @@ include "components/header.php";
             })
 
             $("#submit-add-translate").click(function () {
-                var formElement = document.querySelector("form");
+                $('form').submit();
+
+                /*var formElement = document.querySelector("form");
                 var formData = new FormData(formElement);
 
                 $.ajax({
@@ -117,7 +136,7 @@ include "components/header.php";
                     success: function ( data ) {
                         alert( data );
                     }
-                });
+                });*/
 
                 /*$.post('/add-translate.php', formData, function(data) {
                     if (data.status === 'success') {

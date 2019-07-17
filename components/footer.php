@@ -1,6 +1,6 @@
 <footer class="mastfoot mt-auto">
     <div class="inner">
-        <p>&copy; 2019</p>
+        <p>&copy; 2019 Valeriy Manchenko Test task</p>
     </div>
 </footer>
 
