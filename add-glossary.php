@@ -85,6 +85,11 @@
 
             <div class="tabs-content" id="myTabContent">
                 <div class="tab-pane fade show active" role="tabpanel" aria-labelledby="home-tab">
+                    <div class="form-group col-md-4 translate pt-3 center-block mr-auto ml-auto" tab-leng="1">
+                        <div class="alert alert-danger">
+                            <span class="glyphicon glyphicon-info-sign"></span> dddd
+                        </div>
+                    </div>
                     <div class="col-md-9 ">
                         <div class="row align-items-center ">
                             <div class="col-md-1 font-weight-bold">#</div>
@@ -147,6 +152,41 @@
             </div>
         </form>
     </div>
+    
+    <script>
+        function objectifyForm(formArray) {//serialize data function
+
+            var returnArray = {};
+            for (var i = 0; i < formArray.length; i++){
+                returnArray[formArray[i]['name']] = formArray[i]['value'];
+            }
+            return returnArray;
+        }
+
+        $('form').on('submit', function (e) {
+            e.preventDefault();
+            const formData = objectifyForm($(this).serializeArray());
+            const keys = Object.keys(formData);
+
+            for (let i=0; i < keys.length; i++ ) {
+                
+                console.log("keys[i].indexOf('lang')", keys[i].indexOf('lang'))
+
+                if (keys[i].indexOf('lang') !== -1) {
+                    if (!formData[keys[i]]) {
+                        const langId = keys[i].split('-')[1];
+                        $('.nav-tabs li:nth-child(' + langId + ') a').click();
+                        $('#message-' + langId).text('')
+                    }
+                }
+
+            }
+
+            formData.forEach((item, index) => {
+                console.log("item", item)
+            })
+        })
+    </script>
 
 
     <script src="/assets/js/add-glossary.js"></script>
