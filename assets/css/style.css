@@ -112,12 +112,16 @@ body {
 .form-signin .checkbox {
     font-weight: 400;
 }
-.form-signin .form-control {
+.form-control {
+	border-radius: 0 !important;
+}
+.form-signin  {
     position: relative;
     box-sizing: border-box;
     height: auto;
     padding: 10px;
     font-size: 16px;
+
 }
 .form-signin .form-control:focus {
     z-index: 2;
@@ -236,41 +240,30 @@ table {
 	background: #004991;
 }
 
-
-.navbar-nav-primary {
-	text-transform: uppercase;
+/* Style the search box inside the navigation bar */
+.topnav .search-container {
+	float: right;
 }
 
-.navbar-form-search {
-	position: relative;
+.topnav input[type=text] {
+	padding: 6px;
+	/*margin-top: 8px;*/
+	font-size: 17px;
+	border: none;
 }
-.navbar-form-search .form-control {
-	width: 250px;
+
+.topnav .search-container button {
+	float: right;
+	padding: 6px 10px;
+	/*margin-top: 8px;*/
+	margin-right: 16px;
+	background: #ddd;
+	font-size: 17px;
+	border: none;
+	cursor: pointer;
 }
-.navbar-form-search .btn {
-	border: 0;
-	background: transparent;
-	font-size: 18px;
+
+.search-container {
+	margin-right: 30px;
 }
-.navbar-form-search .btn:active, .navbar-form-search .btn:hover, .navbar-form-search .btn:focus {
-	color: #000;
-	outline: none;
-	box-shadow: none;
-}
-.navbar-form-search .search-form-container {
-	text-align: right;
-	position: absolute;
-	width: 300px;
-	overflow: hidden;
-	background: #fff;
-	right: 60px;
-	top: 0;
-	z-index: 9;
-	transition: all .3s ease-in-out;
-}
-.navbar-form-search .search-form-container.hdn {
-	width: 0;
-}
-.navbar-form-search .search-form-container .search-input-group {
-	width: 300px;
-}
+

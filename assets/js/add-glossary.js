@@ -1,6 +1,6 @@
 var pidie = new Pidie();
 
-$(document).ready(function(){
+$(document).ready(function() {
     addTranslateLisner();
 
     $(".nav-tabs").on("click", "a", function (e) {
@@ -58,7 +58,10 @@ function addLang() {
 
         showLang(id);
 
-        $('.nav-tabs li:nth-child(' + id + ') a').click();
+        setTimeout(() => {
+            $('.nav-tabs li:nth-child(' + id + ') a').click();
+        }, 1)
+
         addTranslateLisner();
         addLang();
 
@@ -88,11 +91,13 @@ function onChangeLanguage(e) {
             break;
         }
     }
+
     const tabs = document.getElementById(name + '-tab');
     const flagArr = document.createElement("div");
     const flag = `<div data-toggle="tooltip" data-placement="top" title="Tooltip on top" style="height: 32px; width: 32px;"><i class="flag flag-${currentLang.id.toLowerCase()}"></i></div>`;
 
-    tabs.innerHTML = flag;
+    console.log("currentLang", currentLang)
+    tabs.innerHTML = `${currentLang.language_name} (${currentLang.language_code}-${currentLang.id})`;
     $('[data-toggle="tooltip"]').tooltip()
 }
 

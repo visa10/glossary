@@ -51,30 +51,33 @@ if(isset($_SESSION['username'])) {
         <nav class="my-2 my-md-0 mr-md-auto ">
             <a class="p-2 " href="/">Home</a>
             <a class="p-2 " href="/glossary.php">Glossary</a>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-                <form class="form-inline ml-auto">
-                    <div class="md-form my-0">
-                        <input class="form-control" type="text" placeholder="Search" aria-label="Search">
-                    </div>
-                    <button href="#!" class="btn btn-outline-white btn-md my-0 ml-sm-2" type="submit">Search</button>
-                </form>
-
-            </div>
         </nav>
+
+        <div class="topnav">
+            <div class="search-container">
+                <form method="get" action="/glossary.php">
+                    <input type="text" placeholder="Search.." name="s">
+                    <button type="submit"><i class="fa fa-search"></i></button>
+                </form>
+            </div>
+
+        </div>
+
         <?php
-            if (!$login) :
-        ?>
+        if (!$login) :
+            ?>
             <a class="btn btn-outline-primary login mr-3" href="login.php">Sing up</a>
             <a class="btn btn-outline-primary register" href="register.php">Register</a>
         <?php
-            else:
-                echo "<div class='mr-3' style='color: #a0a0a0'>$welcome</div>";
-        ?>
+        else:
+            echo "<div class='mr-3' style='color: #a0a0a0'>$welcome</div>";
+            ?>
             <a class="btn btn-outline-primary" href="logout.php" >Logout</a>
         <?php
-            endif;
+        endif;
         ?>
+
 
     </div>
 </header>

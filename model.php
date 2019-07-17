@@ -114,6 +114,14 @@ class Model
         return $stmt->fetchAll();
     }
 
+    function getSearchCards($search) {
+
+        $sql = "SELECT * FROM card WHERE theme LIKE :term";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute(['term' => "%$search%" ]);
+        return $stmt->fetchAll();
+    }
+
     function getCard($id) {
         $sql = "SELECT 
                     card.id as cardId,
